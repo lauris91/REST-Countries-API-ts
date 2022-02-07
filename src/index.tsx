@@ -1,3 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import ReactDOM from 'react-dom'
 
-ReactDOM.render(<div> This is a new react app</div>, document.getElementById('root'))
+import { App } from 'App'
+import './styles/index.scss'
+
+ReactDOM.render(<App />, document.getElementById('root'))
