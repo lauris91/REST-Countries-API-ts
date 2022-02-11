@@ -3,6 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -54,6 +55,9 @@ module.exports = {
       template: path.resolve(__dirname, './src/index.html'),
     }),
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'src/assets', to: 'assets' }],
+    }),
   ],
   devServer: {
     static: path.join(__dirname, './src'),

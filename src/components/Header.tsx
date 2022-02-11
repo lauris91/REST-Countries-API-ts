@@ -29,7 +29,7 @@ export const Header = () => {
   }
 
   return (
-    <header className='d-flex justify-content-between'>
+    <header className='d-flex justify-content-between' data-testid='test'>
       <div>Where in the world?</div>
       <div onClick={handleOnClick} aria-hidden='true'>
         <FontAwesomeIcon icon={togClass === 'dark' ? faMoon : farMoon} className='me-2' />

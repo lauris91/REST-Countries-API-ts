@@ -4,7 +4,7 @@
 body {
   font-family: 'Nuno Sans', sans-serif;
   @include themed() {
-    background: t(bg);
+    background: t($bg);
   }
 }
 
