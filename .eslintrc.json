@@ -29,6 +29,7 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": ["src/*.html", "src/*.json"],
   "rules": {
     "import/order": [
       "warn",
@@ -40,7 +41,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
+      "files": ["**/*.ts", "**/*.tsx", "*.config.ts"],
       "plugins": [
         "import",
         "react",

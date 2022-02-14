@@ -1,69 +1,9 @@
-const path = require('path')
+const { merge } = require('webpack-merge')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
+// const CopyPlugin = require('copy-webpack-plugin')
+const commonConfig = require('./config/webpack.common')
 
-module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
-  },
-  mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.[jt]sx?$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/inline',
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
-    plugins: [new TsconfigPathsPlugin()],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-    }),
-    new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [{ from: 'src/assets', to: 'assets' }],
-    }),
-  ],
-  devServer: {
-    static: path.join(__dirname, './src'),
-    port: 3000,
-    hot: 'only',
-    compress: true,
-    open: true,
-  },
+module.exports = ({ env }) => {
+  const config = require(`./config/webpack.${env}`)
+  return merge(commonConfig, config)
 }
